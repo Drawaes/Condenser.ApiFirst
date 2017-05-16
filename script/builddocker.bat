@@ -1,0 +1,1 @@
+docker build ..\docker\CondenserDotNet.ApiFirst\ -t condenserdotnet.apifirst
