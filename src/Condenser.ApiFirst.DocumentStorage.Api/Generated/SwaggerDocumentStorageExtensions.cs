@@ -29,9 +29,12 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task SaveNewSwaggerDocAsync(this ISwaggerDocumentStorage operations, string agent, string serviceName, string serviceId, Schema swaggerDoc = default(Schema), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<string> SaveNewSwaggerDocAsync(this ISwaggerDocumentStorage operations, string agent, string serviceName, string serviceId, Schema swaggerDoc = default(Schema), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.SaveNewSwaggerDocWithHttpMessagesAsync(agent, serviceName, serviceId, swaggerDoc, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                using (var _result = await operations.SaveNewSwaggerDocWithHttpMessagesAsync(agent, serviceName, serviceId, swaggerDoc, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

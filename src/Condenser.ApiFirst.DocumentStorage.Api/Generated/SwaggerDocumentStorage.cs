@@ -40,7 +40,7 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public SwaggerDocumentStorage(params DelegatingHandler[] handlers) : base(handlers)
+        internal SwaggerDocumentStorage(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
@@ -54,7 +54,7 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public SwaggerDocumentStorage(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        internal SwaggerDocumentStorage(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
@@ -71,7 +71,7 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public SwaggerDocumentStorage(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        internal SwaggerDocumentStorage(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -95,7 +95,7 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public SwaggerDocumentStorage(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        internal SwaggerDocumentStorage(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -158,6 +158,9 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
@@ -167,7 +170,7 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> SaveNewSwaggerDocWithHttpMessagesAsync(string agent, string serviceName, string serviceId, Schema swaggerDoc = default(Schema), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<string>> SaveNewSwaggerDocWithHttpMessagesAsync(string agent, string serviceName, string serviceId, Schema swaggerDoc = default(Schema), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (agent == null)
             {
@@ -266,9 +269,27 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse();
+            var _result = new HttpOperationResponse<string>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);

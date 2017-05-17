@@ -2,14 +2,24 @@
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.Swagger;
+using CondenserDotNet.Client;
+using CondenserDotNet.Middleware.ConsulCleanShutdown;
 using System;
 
 namespace Condenser.ApiFirst.DocumentStorage.Core
 {
     public class Startup
     {
-        public void Configure(IApplicationBuilder app)
+        public static int Port { get; set; }
+
+        public void Configure(IApplicationBuilder app, IServiceManager serviceManager)
         {
+            serviceManager
+                .AddHttpHealthCheck("api/health", 30);
+            serviceManager.DeregisterIfCriticalAfter = TimeSpan.FromMinutes(1);
+            serviceManager.RegisterServiceAsync().Wait();
+
+            app.UseConsulShutdown();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -20,6 +30,9 @@ namespace Condenser.ApiFirst.DocumentStorage.Core
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConsulServices();
+            services.AddConsulShutdown();
+
             services.AddMvcCore()
                 .AddApiExplorer()
                 .AddJsonFormatters()
@@ -27,10 +40,15 @@ namespace Condenser.ApiFirst.DocumentStorage.Core
                 {
                     j.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
-
+                        
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Swagger Document Storage", Version = "v1", License = new License() { Name = "MIT" } });
+                c.DescribeAllEnumsAsStrings();
+            });
+            services.Configure<ServiceManagerConfig>( conf =>
+            {
+                conf.ServiceId = $"OurInstance{Port}";
             });
         }
     }
