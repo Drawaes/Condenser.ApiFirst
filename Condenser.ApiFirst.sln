@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26510.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{073839B4-CA41-4EBA-8E0E-097E3463F4A4}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{484B2797-4C8B-4FD3-A312-B5CC99B63FA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condenser.ApiFirst.ServiceDiscoveryClient", "samples\Condenser.ApiFirst.ServiceDiscoveryClient\Condenser.ApiFirst.ServiceDiscoveryClient.csproj", "{A91868CC-DBCA-467B-BDBF-2EBAF27FEFDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CondenserDotNet.Environment.LightUp", "src\CondenserDotNet.Environment.LightUp\CondenserDotNet.Environment.LightUp.csproj", "{94A1E410-7FD4-45EB-9485-FBA7D69872A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,18 @@ Global
 		{A91868CC-DBCA-467B-BDBF-2EBAF27FEFDB}.Release|x64.Build.0 = Release|Any CPU
 		{A91868CC-DBCA-467B-BDBF-2EBAF27FEFDB}.Release|x86.ActiveCfg = Release|Any CPU
 		{A91868CC-DBCA-467B-BDBF-2EBAF27FEFDB}.Release|x86.Build.0 = Release|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Debug|x64.Build.0 = Debug|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Debug|x86.Build.0 = Debug|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Release|x64.ActiveCfg = Release|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Release|x64.Build.0 = Release|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,5 +111,6 @@ Global
 		{AD33393D-BA4A-4192-B750-A79E875FEBDF} = {073839B4-CA41-4EBA-8E0E-097E3463F4A4}
 		{736BF317-ECCD-4B2E-A067-82226A8FDE62} = {073839B4-CA41-4EBA-8E0E-097E3463F4A4}
 		{A91868CC-DBCA-467B-BDBF-2EBAF27FEFDB} = {484B2797-4C8B-4FD3-A312-B5CC99B63FA6}
+		{94A1E410-7FD4-45EB-9485-FBA7D69872A4} = {073839B4-CA41-4EBA-8E0E-097E3463F4A4}
 	EndGlobalSection
 EndGlobal

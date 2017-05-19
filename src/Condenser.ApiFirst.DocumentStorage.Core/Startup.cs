@@ -35,12 +35,8 @@ namespace Condenser.ApiFirst.DocumentStorage.Core
 
             services.AddMvcCore()
                 .AddApiExplorer()
-                .AddJsonFormatters()
-                .AddJsonOptions(j =>
-                {
-                    j.SerializerSettings.Converters.Add(new StringEnumConverter());
-                });
-                        
+                .AddJsonFormatters();                
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Swagger Document Storage", Version = "v1", License = new License() { Name = "MIT" } });
