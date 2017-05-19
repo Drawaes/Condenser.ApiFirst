@@ -1,28 +1,27 @@
-##Time for a Little Bit of Data!!
+##Registrion, zero config
 ---
 ###Dev Environment
 
 
 1. Visual Studio Community Edition
 1. ConEmu
-1. Visual Studio Code
 1. Docker for Windows
 ---
 ###Tutorial Goal
 
 
-1. Install a SqlServer Instance
-2. Script out a test database
-3. Begin reading values out of the database
+1. Setup consul in docker
+2. Have services register
+3. Use the registry
+4. Implement Health Checks
 ---
 ###Learning Goal
 
 
-1. Have Consul running in docker in our Dev Environment
-1. Have service instances registring with Consul
-1. Perform basic health checking
+1. Consul, on docker
+1. Service registry concept
+1. Health checking
 1. Learn to keep our registry clean
-1. Use our service registry to find healthy instances to call
 
 ---
 ##Getting Consul Running for Dev
