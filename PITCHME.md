@@ -32,35 +32,31 @@
 +++
 ![Setting up Consul](https://www.youtube.com/embed/s3nzmb6515U)
 ---
-##Scripting it all
+##Registration and Discovery
 
 *Press down to view video*
 +++
-![Scripting it all up](https://www.youtube.com/embed/X7M1PQ_CW-o)
+![Registration](https://www.youtube.com/embed/X3Kgu3_2i6g)
 ---
-##Using Dapper to read data
+##Keeping it Clean
 
 
 *Press down to view video*
 +++
-![Using Dapper to get data](https://www.youtube.com/embed/7VtMNW4ZbiU)
----
-##A Little bit of Housekeeping
-+++
-![A Bit of Housekeeping](https://www.youtube.com/embed/PEMy-QItjvg)
+![Keeping it Clean]()
 ---
 ###What did we achieve?
 
 
-1. Scripted/Repeatable database for testing
-1. Ability to easily add new and more test data
-1. Async controller methods
-1. Injected repositories and configuration
+1. Consul running in docker
+1. Health checks working
+1. Maintaince Mode and quick takedown
+1. Registry kept clean
 ---
 ###Links
 
 
-1. [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
-1. [Dapper](https://github.com/StackExchange/Dapper)
-1. [MSSQL for Linux on Docker](https://hub.docker.com/r/microsoft/mssql-server-linux/)
-1. [Code on github](https://github.com/Drawaes/CodePersuit/tree/Tutorial2)
+1. [Consul](https://consul.io)
+1. [CondenserDotNet](https://github.com/Drawaes/condenserdotnet)
+1. [Consul for Docker](https://hub.docker.com/_/consul/)
+1. [Code on github](https://github.com/Drawaes/Condenser.ApiFirst/tree/Tutorial1)
