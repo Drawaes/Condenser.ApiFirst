@@ -1,4 +1,4 @@
-##Registrion, zero config
+##Zero Config Discovery
 ---
 ###Dev Environment
 
