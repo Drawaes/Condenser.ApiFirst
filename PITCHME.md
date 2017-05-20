@@ -42,7 +42,7 @@
 
 *Press down to view video*
 +++
-![Keeping it Clean]()
+![Health and Keeping it Clean](https://www.youtube.com/embed/R3LiBkdUJC8)
 ---
 ###What did we achieve?
 
