@@ -27,7 +27,7 @@ GO
 --Create system-versioned temporal table. It must have primary key and two datetime2 columns that are part of SYSTEM_TIME period definition
 CREATE TABLE [dbo].[SwaggerDoc]
 (
-    ServiceHash binary(64) NOT NULL,
+    ServiceHash binary(32) NOT NULL,
 	ServiceId varchar(800) NOT NULL,
 	AgentId varchar(800) NOT NULL,
     ServiceName varchar(1024) NOT NULL,

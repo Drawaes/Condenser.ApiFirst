@@ -16,8 +16,8 @@ namespace Condenser.ApiFirst.DocumentStorage.Core
         {
             serviceManager
                 .AddHttpHealthCheck("api/health", 30);
-            serviceManager.DeregisterIfCriticalAfter = TimeSpan.FromMinutes(1);
-            serviceManager.RegisterServiceAsync().Wait();
+            serviceManager.WithDeregisterIfCriticalAfterMinutes(1);
+            serviceManager.RegisterServiceAsync();
 
             app.UseConsulShutdown();
             app.UseMvc();
