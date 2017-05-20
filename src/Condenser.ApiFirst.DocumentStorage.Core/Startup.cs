@@ -15,11 +15,12 @@ namespace Condenser.ApiFirst.DocumentStorage.Core
         public void Configure(IApplicationBuilder app, IServiceManager serviceManager)
         {
             serviceManager
-                .AddHttpHealthCheck("api/health", 30);
-            serviceManager.DeregisterIfCriticalAfter = TimeSpan.FromMinutes(1);
-            serviceManager.RegisterServiceAsync().Wait();
+                .AddHttpHealthCheck("api/health", 60)
+                .WithDeregisterIfCriticalAfterMinutes(1)
+                .RegisterServiceAsync();
 
             app.UseConsulShutdown();
+
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -31,20 +32,17 @@ namespace Condenser.ApiFirst.DocumentStorage.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConsulServices();
-            services.AddConsulShutdown();
-
+            
             services.AddMvcCore()
                 .AddApiExplorer()
-                .AddJsonFormatters();                
+                .AddJsonFormatters();
+
+            services.AddConsulShutdown();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Swagger Document Storage", Version = "v1", License = new License() { Name = "MIT" } });
                 c.DescribeAllEnumsAsStrings();
-            });
-            services.Configure<ServiceManagerConfig>( conf =>
-            {
-                conf.ServiceId = $"OurInstance{Port}";
             });
         }
     }
