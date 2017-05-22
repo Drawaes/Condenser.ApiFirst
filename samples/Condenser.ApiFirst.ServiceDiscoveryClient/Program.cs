@@ -14,14 +14,21 @@ namespace Condenser.ApiFirst.ServiceDiscoveryClient
             var key = ' ';
             while (key != 'x')
             {
-                var swagger = JsonConvert.DeserializeObject<DocumentStorage.Api.Models.Schema>(doc);
-                var result = client.SaveNewSwaggerDocWithHttpMessagesAsync("TestAgent", "ServiceName", "ServiceId", swagger);
-                Console.WriteLine("Waiting");
-                result.Wait();
-                Console.WriteLine($"Result Code {result.Result.Response.StatusCode}");
-                if (result.Result.Response.IsSuccessStatusCode)
+                try
                 {
-                    Console.WriteLine($"Response was {result.Result.Response.Content.ReadAsStringAsync().Result}");
+                    var swagger = JsonConvert.DeserializeObject<DocumentStorage.Api.Models.Schema>(doc);
+                    var result = client.SaveNewSwaggerDocWithHttpMessagesAsync("TestAgent", "ServiceName", "ServiceId", swagger);
+                    Console.WriteLine("Waiting");
+                    result.Wait();
+                    Console.WriteLine($"Result Code {result.Result.Response.StatusCode}");
+                    if (result.Result.Response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine($"Response was {result.Result.Response.Content.ReadAsStringAsync().Result}");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Exception " + ex.ToString());
                 }
                 key = Console.ReadKey().KeyChar;
             }

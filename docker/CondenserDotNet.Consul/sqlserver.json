@@ -1,0 +1,7 @@
+{
+    "service": {
+        "name": "sqlserver",
+        "address": "10.1.75.1",
+        "port": 1433
+    }
+}

@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  condenserdotnet.consulkv:
+    image: condenserdotnet.consulkv
+    build:
+      context: ./src/CondenserDotNet.ConsulKV
+      dockerfile: Dockerfile

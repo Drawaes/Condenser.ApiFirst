@@ -1,1 +1,1 @@
-autorest -Input http://localhost:8888/swagger/v1/swagger.json -CodeGenerator CSharp -SyncMethods none -OutputDirectory ..\src\Condenser.ApiFirst.DocumentStorage.Api\Generated -Namespace Condenser.ApiFirst.DocumentStorage.Api
+autorest -Input http://localhost:51705/swagger/v1/swagger.json -CodeGenerator CSharp -SyncMethods none -OutputDirectory ..\src\Condenser.ApiFirst.DocumentStorage.Api\Generated -Namespace Condenser.ApiFirst.DocumentStorage.Api

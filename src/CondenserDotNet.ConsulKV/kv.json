@@ -1,0 +1,10 @@
+﻿[
+  {
+    "key": "myCompany/Condenser/SwaggerProcessor/AllowNewMethods",
+    "value": "true"
+  },
+  {
+    "key": "myCompany/Condenser/SwaggerProcessor/DelayForProcessing",
+    "value": "4000"
+  }
+]
