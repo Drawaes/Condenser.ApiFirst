@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Condenser.ApiFirst.DocumentStorage.Core.Models;
 using Condenser.ApiFirst.DocumentStorage.Core.Data;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Condenser.ApiFirst.DocumentStorage.Core
 {
@@ -19,15 +20,32 @@ namespace Condenser.ApiFirst.DocumentStorage.Core
     {
         public Startup(IHostingEnvironment environment)
         {
+            var seriSwitch = new Serilog.Core.LoggingLevelSwitch(Serilog.Events.LogEventLevel.Information);
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.ControlledBy(seriSwitch)
+                .Enrich.FromLogContext()
+                .WriteTo.ColoredConsole(outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{Scope}] {Message}{NewLine}")
+                .CreateLogger();
+
             var configRegistry = new ConsulRegistry(null);
             configRegistry.AddUpdatingPathAsync("myCompany/Condenser").Wait();
+            configRegistry.AddUpdatingPathAsync("WebApps").Wait();
+            configRegistry.AddWatchOnSingleKey("Logging:MinimumLevel", value =>
+            {
+                if (Enum.TryParse(value, out Serilog.Events.LogEventLevel level))
+                {
+                    seriSwitch.MinimumLevel = level;
+                }
+            });
             Configuration = configRegistry;
         }
 
         public static IConfigurationRegistry Configuration;
 
-        public void Configure(IApplicationBuilder app, IServiceManager serviceManager)
+        public void Configure(IApplicationBuilder app, IServiceManager serviceManager, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddSerilog();
+
             serviceManager
                 .AddHttpHealthCheck("api/health", 1);
             serviceManager.WithDeregisterIfCriticalAfterMinutes(1);
