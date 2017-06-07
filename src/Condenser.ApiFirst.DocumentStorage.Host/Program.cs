@@ -8,12 +8,10 @@ namespace Condenser.ApiFirst.DocumentStorage.Host
     {
         static void Main(string[] args)
         {
-            var port = CondenserDotNet.Client.ServiceManagerConfig.GetNextAvailablePort();
-            Startup.Port = port;
             var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseUrls($"http://*:{port}")
                 .UseStartup<Startup>()
+                .UseKestrel()
+                .UseUrls("http://*:5000")
                 .Build();
 
             host.Run();

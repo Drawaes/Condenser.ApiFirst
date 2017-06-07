@@ -73,11 +73,7 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// </exception>
         internal SwaggerDocumentStorage(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
-            if (baseUri == null)
-            {
-                throw new System.ArgumentNullException("baseUri");
-            }
-            BaseUri = baseUri;
+            BaseUri = baseUri ?? throw new System.ArgumentNullException("baseUri");
         }
 
         /// <summary>
@@ -97,11 +93,7 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
         /// </exception>
         internal SwaggerDocumentStorage(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
-            if (baseUri == null)
-            {
-                throw new System.ArgumentNullException("baseUri");
-            }
-            BaseUri = baseUri;
+            BaseUri = baseUri ?? throw new System.ArgumentNullException("baseUri");
         }
 
         /// <summary>
@@ -190,12 +182,14 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
             if (_shouldTrace)
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("agent", agent);
-                tracingParameters.Add("serviceName", serviceName);
-                tracingParameters.Add("serviceId", serviceId);
-                tracingParameters.Add("swaggerDoc", swaggerDoc);
-                tracingParameters.Add("cancellationToken", cancellationToken);
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>
+                {
+                    { "agent", agent },
+                    { "serviceName", serviceName },
+                    { "serviceId", serviceId },
+                    { "swaggerDoc", swaggerDoc },
+                    { "cancellationToken", cancellationToken }
+                };
                 ServiceClientTracing.Enter(_invocationId, this, "SaveNewSwaggerDoc", tracingParameters);
             }
             // Construct URL
@@ -269,9 +263,11 @@ namespace Condenser.ApiFirst.DocumentStorage.Api
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<string>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            var _result = new HttpOperationResponse<string>
+            {
+                Request = _httpRequest,
+                Response = _httpResponse
+            };
             // Deserialize Response
             if ((int)_statusCode == 200)
             {

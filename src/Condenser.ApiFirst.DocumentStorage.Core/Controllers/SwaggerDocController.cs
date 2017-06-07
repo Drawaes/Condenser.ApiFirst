@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.SwaggerGen;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +12,6 @@ namespace Condenser.ApiFirst.DocumentStorage.Core.Controllers
     public class SwaggerDocController:ControllerBase
     {
         [HttpPost("{agent}/{serviceName}/{serviceId}")]
-        [SwaggerOperation("SaveNewSwaggerDoc")]
         [ProducesResponseType(typeof(string), 200)]
         public Task<ActionResult> Post(string agent, string serviceName, string serviceId, [FromBody] SwaggerDoc.Core.Schema swaggerDoc)
         {
